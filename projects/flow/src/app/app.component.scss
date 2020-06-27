@@ -1,0 +1,38 @@
+@import "../styles/settings/settings.colors";
+
+
+.header {
+    height: 70px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid map-get($map: $ui-colors, $key: "divider-color"); 
+
+    &__logo { 
+        height: 100%;
+        &--mobile {
+            height: 100%;
+            display: none;
+        }
+    }
+
+    &__title {
+        vertical-align: middle;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        img {
+            height: 46px;
+            width: 46px;;
+        }
+        span {
+            font-weight: normal;
+        }
+    }
+}

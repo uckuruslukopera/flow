@@ -1,0 +1,7 @@
+@mixin bg-horizontal-gradient($from, $to, $stop: 100%) {
+    background: linear-gradient(to right, $from 0%, $to $stop);
+}
+
+@mixin bg-vertical-gradient($from, $to, $stop: 100%) {
+    background: linear-gradient($from 0%, $to $stop);
+}

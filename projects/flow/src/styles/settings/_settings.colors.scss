@@ -1,0 +1,44 @@
+$ui-colors:(
+	
+	'main-hover': #2B98F0,
+	'nirvana': #ec4e48,
+	'cohen': #21242B,
+	'katatonia': #2D2F35,
+	'metallica':  #35383D,	
+	'just-black': #000000,
+	'just-white': #ffffff,
+	'danger': #ec4e48,
+
+	'divider-color': #dcdce5
+
+);
+
+// @function getColor($ui-colors, $alpha:100)
+// {
+// 	@if map-has-key($ui-colors, $color){
+// 		@return rgba(map-get($ui-colors, $color), $alpha);
+// 	}
+// 	@warn "Unkown '#{$key}' in $ui-colors at _settings.colors.scss";
+// 	@return null;
+// };
+
+
+
+// $primary-color: #EB5757;
+
+// $base-font-color: #333333;
+
+// $input-bg-color: #E0E0E0;
+// $input-border-color: #333333;
+
+// $placeholder-text-color: #828282;
+
+// $light-text-color: #F2F2F2;
+
+
+// $table-cell-border-color: #828282;
+
+// $bg-start: #C33764;
+// $bg-stop: #1D2671;
+
+// $light-bg-color: #F2F2F2;

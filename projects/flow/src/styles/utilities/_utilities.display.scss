@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+    .display-none-mobile {
+        display: none;        
+    }
+
+    .display-none-desktop {
+        display: inherit;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .display-none-mobile {
+        display: inherit;        
+    }
+
+    .display-none-desktop {
+        display: none;
+    }
+  }
