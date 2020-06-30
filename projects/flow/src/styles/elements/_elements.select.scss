@@ -1,0 +1,15 @@
+select {
+    display: inline-block;
+    @include t--border-radius(10.5em);
+    border: 1px solid map-get($map: $ui-colors, $key: 'border-color');
+    padding: 0 1em;
+    color: map-get($map: $ui-colors, $key: 'text-color');
+    cursor: pointer;
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-color: map-get($map: $ui-colors, $key: 'active-border-color');
+        outline: none;
+    }
+}

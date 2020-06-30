@@ -1,0 +1,16 @@
+<div class="page-size">
+    <select [ngModel]="currentPageSize" (ngModelChange)="changePageSize($event)">
+        <option *ngFor="let option of pageSizes" [value]="option.value" [selected]="option.value === currentPageSize">
+            {{option.displayName}}
+        </option>
+    </select>
+</div>
+
+
+
+<ul *ngIf="totalPages > 1" class="pagination">
+    <li *ngFor="let page of availablePages" class="pagination_page-item"
+        [ngClass]="{'pagination_page-item--active': currentPage === page}">
+        <a (click)="setPage(page)">{{page + 1}}</a>
+    </li>
+</ul>

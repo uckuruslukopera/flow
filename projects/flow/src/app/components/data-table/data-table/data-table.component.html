@@ -1,0 +1,33 @@
+<app-search-input *ngIf="settings?.enableSearch" [placeholder]="settings?.searchPlaceholder"
+    (inputChanged)="searchHandler($event)"></app-search-input>
+<div class="data-table" [ngClass]="{'margin-top-60': !settings?.enableSearch}">
+    <div class="data-table__content">
+        <div *ngFor="let column of settings?.columns" class="data-table__content-column">
+            <div class="data-table__content-column--header">
+                <app-sort-title *ngIf="column.sort" [column]="column" [isSortField]="isSortField(column.propertyName)"
+                    [isAscending]="isAscending(column.propertyname)" (sortChanged)="setSort($event)">
+                </app-sort-title>
+                <span *ngIf="!column.sort">{{column.displayName | uppercase}}</span>
+            </div>
+            <div *ngFor="let record of settings?.data; let i=index" class="data-table__content-column--cell">
+                <span
+                    *ngIf="i !== cellBeingEdited.index || column.propertyName !== cellBeingEdited.column">{{getValue(record, column.propertyName)}}</span>
+                <i *ngIf="i !== cellBeingEdited.index || column.propertyName !== cellBeingEdited.column"
+                    class="material-icons data-table__content-column--cell-icon--edit"
+                    (click)="switchToEdit(i, column.propertyName)">edit</i>
+                <input autofocus *ngIf="i === cellBeingEdited.index && column.propertyName === cellBeingEdited.column"
+                    type="text" [(ngModel)]="newCellValue">
+                <i *ngIf="i === cellBeingEdited.index && column.propertyName === cellBeingEdited.column"
+                    class="material-icons data-table__content-column--cell-icon--save"
+                    (click)="saveCell(i, column.propertyName)">check</i>
+            </div>
+        </div>
+    </div>
+    <div class="data-table__footer">
+
+        <app-pagination [totalPages]="settings?.totalPages" [currentPage]="settings?.currentPage"
+            (pageChanged)="setPage($event)" [pageSizes]="settings?.pageSizes"
+            [currentPageSize]="settings?.currentPageSize" (pageSizeChanged)="setPageSize($event)"></app-pagination>
+
+    </div>
+</div>

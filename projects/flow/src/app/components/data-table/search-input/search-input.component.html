@@ -1,0 +1,4 @@
+<form class="search-input" (ngSubmit)="searchHandler(form.value)" #form="ngForm">
+    <input type="text" [placeholder]="placeholder" ngModel name="queryText">
+    <app-button type="submit" style="flex-basis: content;" theme="primary">SEARCH</app-button>
+</form>

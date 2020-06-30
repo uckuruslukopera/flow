@@ -1,0 +1,49 @@
+@import '../../../../styles/settings/settings.colors';
+@import '../../../../styles/utilities/utilities.fonts';
+@import '../../../../styles/utilities/utilities.border-radius';
+
+.data-table {
+    
+    width:100%;
+    border: 1px solid #dcdce5;
+    @include t--border-radius(1px);
+    
+    box-shadow: 0px 0.25em 10px rgba(0, 0, 0, 0.10);
+
+    &__content {
+        overflow: auto;
+        white-space: nowrap;
+        padding: 20px 20px;
+        display: flex;        
+        &-column {    
+               flex-grow: 1;
+            &--header {
+                color: #a8adaf;
+                @include font-face('bold');
+                padding: 1em 2em 1em 0;                
+            }
+            &--cell {
+                border-top: solid 1px map-get($ui-colors, border-color);        
+                padding: 1em 2em 1em 0.1em;
+                &-icon {
+                    &--save {
+                        margin-left: 5px;
+                        cursor: pointer;
+                        font-size: 0.9em;  
+                    }
+                    &--edit {
+                        color: map-get($ui-colors, border-color);
+                        margin-left: 5px;
+                        cursor: pointer;
+                        font-size: 0.9em;  
+                    }
+                }
+            }
+        }
+    }
+    &__footer {
+        border-top: solid 1px map-get($ui-colors, border-color);
+        padding: 20px 20px;
+
+    }
+}

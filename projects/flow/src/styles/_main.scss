@@ -7,10 +7,14 @@
 @import "./utilities/utilities.margin";
 @import "./utilities/utilities.images";
 @import "./utilities/utilities.display";
+@import "./utilities/utilities.effects";
 @import "./generic/generic.normalize";
 @import "./generic/generic.box-sizing";
 @import "./generic/generic.reset";
 @import "./generic/generic.scrollbar";
-@import "./elements/elements.a";
+@import "./elements/elements.links";
+@import "./elements/elements.headings";
 @import "./elements/elements.body";
 @import "./elements/elements.html";
+@import "./elements/elements.input";
+@import "./elements/elements.select";

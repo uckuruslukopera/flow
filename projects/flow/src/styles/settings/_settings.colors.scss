@@ -7,10 +7,19 @@ $ui-colors:(
 	'metallica':  #35383D,	
 	'just-black': #000000,
 	'just-white': #ffffff,
-	'danger': #ec4e48,
+	
 
-	'divider-color': #dcdce5
-
+	'divider-color': #dcdce5,
+	'primary-color': #000000,
+	'secondary-color': #ffffff,
+	'danger-color': #ec4e48,
+	'hover-color': #2B98F0,
+	'text-color': #21242b,
+	'border-color': #dcdce5,
+	'active-border-color': #2096F3,
+	'light-bg-color': #f2f2f2,
+	'active-bg-color': #3a2e39,
+	'active-text-color': #ffffff
 );
 
 // @function getColor($ui-colors, $alpha:100)

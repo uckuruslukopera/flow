@@ -1,0 +1,27 @@
+input {
+    
+    border:none;
+    
+    &:focus {
+        // border-bottom: none;
+        outline:none;
+    }
+    &::-webkit-input-placeholder {
+        
+        font-size: 16px;
+      }
+      &::-moz-placeholder {
+        
+        font-size: 16px;
+      }
+      &:-ms-input-placeholder {
+        
+        font-size: 16px;
+      }
+      &::placeholder {
+        ::before {
+          content: "\f104";
+        }
+        font-size: 16px;
+      }
+}

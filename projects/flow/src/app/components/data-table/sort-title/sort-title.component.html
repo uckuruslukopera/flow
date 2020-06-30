@@ -1,0 +1,8 @@
+<div (click)="toggle($event)" class="sort-title">
+    {{column.displayName | uppercase}}
+    <span>
+        <i class="material-icons" [ngClass]="{'sort-title--selected': (isSortField && isAscending)}">expand_less</i>
+        <i class="material-icons" [ngClass]="{'sort-title--selected': (isSortField && !isAscending)}">expand_more</i>
+    </span>
+
+</div>

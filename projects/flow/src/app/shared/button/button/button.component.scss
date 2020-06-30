@@ -1,0 +1,46 @@
+@import '../../../../styles/settings/settings.colors';
+@import '../../../../styles/utilities/utilities.border-radius';
+@import '../../../../styles/utilities/utilities.fonts';
+
+.button {
+    @include t--border-radius(1.5em);
+    @include font-face('bold');
+    padding: 0.1em 2.5em 0px;
+    height: 3em;
+    outline: none;
+    border-style: solid;
+    font-size: 0.9em;
+
+    //defaults
+    background-color: map-get($map: $ui-colors, $key: "secondary-color");
+    border-color: map-get($map: $ui-colors, $key: "primary-color");
+    color: map-get($map: $ui-colors, $key: "text-color");
+    
+    &:hover {
+        color: map-get($map: $ui-colors, $key: "just-white");  
+        background-color: map-get($map: $ui-colors, $key: "hover-color");  
+        border-color: map-get($map: $ui-colors, $key: "hover-color");  
+    }
+    &:active {
+        color: darken(map-get($map: $ui-colors, $key: "just-white"), 10%);
+        background-color: darken(map-get($map: $ui-colors, $key: "hover-color"), 20%);
+        border-color: darken(map-get($map: $ui-colors, $key: "hover-color"), 20%);
+        outline: none;
+    }
+    &--primary {
+        background-color: map-get($map: $ui-colors, $key: "primary-color");
+        border-color: map-get($map: $ui-colors, $key: "primary-color");    
+        color: map-get($map: $ui-colors, $key: "just-white");    
+    }
+    &--secondary {
+        background-color: map-get($map: $ui-colors, $key: "secondary-color");
+        border-color: map-get($map: $ui-colors, $key: "primary-color");
+        color: map-get($map: $ui-colors, $key: "text-color");
+    }
+    &--danger {
+        background-color: map-get($map: $ui-colors, $key: "danger-color");
+        border-color: map-get($map: $ui-colors, $key: "danger-color");
+        color: map-get($map: $ui-colors, $key: "just-white");
+    }
+
+}

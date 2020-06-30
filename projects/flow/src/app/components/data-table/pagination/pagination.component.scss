@@ -1,0 +1,47 @@
+@import '../../../../styles/settings/settings.colors';
+@import '../../../../styles/utilities/utilities.border-radius';
+@import '../../../../styles/utilities/utilities.fonts';
+
+:host {
+    display: flex;   
+    width: 100%;;
+
+}
+
+.page-size {
+    flex-basis: 33%;
+}
+
+
+.pagination {    
+    
+    list-style: none;
+    &_page-item {
+        display: inline-block;
+        cursor: pointer;
+        min-width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        text-align: center;
+        background-color: map-get($ui-colors, "light-bg-color");	
+        color: map-get($ui-colors, "text-color");	
+        @include t--border-radius(50px);
+        a {
+            vertical-align: middle;
+            &:focus {
+                outline: none;
+            }
+        }
+        &--active,
+        &:hover,
+        &:focus {   
+            outline: none;  
+            background-color: map-get($ui-colors, "active-bg-color");                            
+            a {
+                outline: none;  
+                color: map-get($ui-colors, "active-text-color");
+                @include font-face('bold');
+            }    
+        }
+    }
+}
