@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:4200/assets/data'
+  baseUrl: 'https://gyroscope8.herokuapp.com/assets/data'
 };
