@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { BaseService } from "./base.service";
 import { HttpClient, HttpParams } from "@angular/common/http";
 
 import { Athlete } from "../models/athlete.interface";
 import { QueryParams } from "../models/query-params.interface";
-import { BehaviorSubject, Observable } from "rxjs";
-import { tap, map } from "rxjs/operators";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { tap, map, takeUntil } from "rxjs/operators";
 
 
 @Injectable({
   providedIn: "root"
 })
-export class AthleteService extends BaseService {
+export class AthleteService extends BaseService implements OnDestroy {
 
   private athletes$: BehaviorSubject<Athlete[]> = new BehaviorSubject([]);
   public readonly athletes: Observable<Athlete[]> = this.athletes$.asObservable();
@@ -28,6 +28,8 @@ export class AthleteService extends BaseService {
   });
   queryParams = this.queryParams$.asObservable();
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(protected http: HttpClient) {
     super(http, "athletes.json");
   }
@@ -35,6 +37,7 @@ export class AthleteService extends BaseService {
   getAthletes(): void {
 
     this.get<Athlete[]>(this.prepareQueryParams()).pipe(
+      takeUntil(this.destroy$),
       tap(response => {
         this.queryParams$.next(
           // Production Version:
@@ -118,26 +121,6 @@ export class AthleteService extends BaseService {
     });
   }
 
-
-
-  // setSortBy(sortBy: string) {
-  //   this.queryParams$.next({
-  //     ...this.queryParams$.value,
-  //     ...{
-  //       sortBy
-  //     }
-  //   });
-  // }
-
-  // setSortDir(sortDir: string) {
-  //   this.queryParams$.next({
-  //     ...this.queryParams$.value,
-  //     ...{
-  //       sortDir
-  //     }
-  //   });
-  // }
-
   private prepareQueryParams(): HttpParams {
 
     let queryParams = new HttpParams();
@@ -207,6 +190,11 @@ export class AthleteService extends BaseService {
       }
     }
 
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
 

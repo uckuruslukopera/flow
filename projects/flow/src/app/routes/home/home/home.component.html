@@ -1,3 +1,4 @@
 <app-data-table [settings]="dataTableSettings" (search)="searchHandler($event)"
-    (changePageSize)="pageSizeChangeHandler($event)" (changePage)="pageChangeHandler($event)"
-    (changeSort)="sortChangeHandler($event)" (saveRecord)="update($event)"></app-data-table>
+    [data]="this.athleteService.athletes | async" (changePageSize)="pageSizeChangeHandler($event)"
+    (changePage)="pageChangeHandler($event)" (changeSort)="sortChangeHandler($event)" (saveRecord)="update($event)">
+</app-data-table>

@@ -9,7 +9,7 @@
                 </app-sort-title>
                 <span *ngIf="!column.sort">{{column.displayName | uppercase}}</span>
             </div>
-            <app-table-cell *ngFor="let record of settings?.data; let i=index" class="data-table__content-column--cell"
+            <app-table-cell *ngFor="let record of data; let i=index" class="data-table__content-column--cell"
                 [record]="record" [column]="column" (editFinished)="saveCell($event)">
             </app-table-cell>
         </div>

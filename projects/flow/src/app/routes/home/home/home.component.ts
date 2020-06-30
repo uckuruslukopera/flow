@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AthleteService } from '../../../services/athlete.service';
 import { DataTableSettings, Type } from '../../../components/data-table/data-table/data-table.component';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   dataTableSettings: DataTableSettings = {
     columns: [
@@ -54,7 +58,6 @@ export class HomeComponent implements OnInit {
         editable: true
       },
     ],
-    data: [],
     searchField: "Name",
     searchPlaceholder: "Enter the first 3 letters of athlete's name",
     pageSizes: [{ displayName: "5", value: 5 },
@@ -70,14 +73,16 @@ export class HomeComponent implements OnInit {
     currentSort: []
   };
 
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private athleteService: AthleteService) {
-    this.athleteService.athletes.subscribe(response => this.dataTableSettings.data = response);
-    this.athleteService.queryParams.subscribe(params => {
+  constructor(public athleteService: AthleteService) {
+    this.athleteService.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
       this.dataTableSettings.totalPages = params.totalPages;
       this.dataTableSettings.currentPage = params.page;
       this.dataTableSettings.currentPageSize = params.pageSize;
-      this.dataTableSettings.currentSort = params.sort.map(s => { return { propertyName: s.field, isAscending: s.method === "ascending" } });
+      this.dataTableSettings.currentSort = params.sort.map(s => {
+        return { propertyName: s.field, isAscending: s.method === "ascending" }
+      });
 
     });
   }
@@ -102,7 +107,7 @@ export class HomeComponent implements OnInit {
     this.athleteService.getAthletes();
   }
 
-  sortChangeHandler(e) {
+  sortChangeHandler(e): void {
     this.athleteService.setSort([{
       field: e.propertyName,
       method: e.isAscending ? "ascending" : "descending"
@@ -110,8 +115,13 @@ export class HomeComponent implements OnInit {
     this.athleteService.getAthletes();
   }
 
-  update(record) {
+  update(record): void {
     this.athleteService.updateAthleteRecord(record);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
 }

@@ -21,7 +21,6 @@ export interface Column {
 
 export interface DataTableSettings {
   columns: Array<Column>;
-  data: Array<any>;
   searchField: string;
   searchPlaceholder: string;
   pageSizes: Array<{ displayName: string, value: number }>;
@@ -41,7 +40,6 @@ export class DataTableComponent implements OnInit {
 
   @Input() settings: DataTableSettings = {
     columns: [],
-    data: [],
     searchField: "",
     searchPlaceholder: "Search",
     pageSizes: [{ displayName: "5", value: 5 },
@@ -56,6 +54,8 @@ export class DataTableComponent implements OnInit {
     enableSearch: true,
     currentSort: []
   };
+
+  @Input() data: Array<any> = [];
 
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changePageSize: EventEmitter<number> = new EventEmitter();
