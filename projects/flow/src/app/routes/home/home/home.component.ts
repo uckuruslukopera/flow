@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AthleteService } from '../../../services/athlete.service';
+import { DataTableSettings, Type } from '../../../components/data-table/data-table/data-table.component';
 
 @Component({
   selector: 'app-home',
@@ -8,37 +9,49 @@ import { AthleteService } from '../../../services/athlete.service';
 })
 export class HomeComponent implements OnInit {
 
-  dataTableSettings = {
+  dataTableSettings: DataTableSettings = {
     columns: [
       {
         displayName: "Position",
         propertyName: "Position",
-        sort: true
+        sort: true,
+        type: Type.Icon,
+        editable: false
       },
       {
         displayName: "Id",
         propertyName: "Id",
-        sort: true
+        sort: true,
+        type: Type.Number,
+        editable: false
       },
       {
         displayName: "Name",
         propertyName: "Name",
-        sort: true
+        sort: true,
+        type: Type.String,
+        editable: true
       },
       {
         displayName: "BPM",
         propertyName: "BeatsPerMinute",
-        sort: true
+        sort: true,
+        type: Type.Number,
+        editable: true
       },
       {
         displayName: "Registered",
         propertyName: "Registered",
-        sort: false
+        sort: false,
+        type: Type.DateTime,
+        editable: false
       },
       {
         displayName: "Country",
         propertyName: "CountryName",
-        sort: true
+        sort: true,
+        type: Type.Custom,
+        editable: true
       },
     ],
     data: [],
@@ -80,7 +93,6 @@ export class HomeComponent implements OnInit {
   }
 
   pageSizeChangeHandler(pageSize): void {
-    console.log(pageSize);
     this.athleteService.setPageSize(pageSize);
     this.athleteService.getAthletes();
   }

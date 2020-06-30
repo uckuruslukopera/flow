@@ -27,12 +27,11 @@ export class PaginationComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  setPage(e) {
+  setPage(e): void {
     this.pageChanged.emit(e);
   }
 
-  changePageSize(e) {
-    console.log(e);
+  changePageSize(e): void {
     this.pageSizeChanged.emit(e);
   }
 

@@ -1,0 +1,21 @@
+@import '../../../../styles/settings/settings.colors';
+
+:host {
+    display: block;
+}
+
+i {
+    margin-left: 5px;
+    font-size: 0.9em;  
+    cursor: pointer;
+}
+    .edit {
+        color: map-get($ui-colors, border-color);
+        margin-left: 5px;
+        cursor: pointer;
+        font-size: 0.9em;  
+    }
+
+    .content {
+        color: map-get($ui-colors, nirvana);
+    }

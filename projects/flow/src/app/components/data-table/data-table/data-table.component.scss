@@ -25,19 +25,7 @@
             &--cell {
                 border-top: solid 1px map-get($ui-colors, border-color);        
                 padding: 1em 2em 1em 0.1em;
-                &-icon {
-                    &--save {
-                        margin-left: 5px;
-                        cursor: pointer;
-                        font-size: 0.9em;  
-                    }
-                    &--edit {
-                        color: map-get($ui-colors, border-color);
-                        margin-left: 5px;
-                        cursor: pointer;
-                        font-size: 0.9em;  
-                    }
-                }
+
             }
         }
     }

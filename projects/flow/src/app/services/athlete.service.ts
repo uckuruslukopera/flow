@@ -46,7 +46,6 @@ export class AthleteService extends BaseService {
             totalElements: response["content"].length
           }
         );
-        console.log(this.queryParams$.value);
       }
 
       ),
@@ -191,7 +190,6 @@ export class AthleteService extends BaseService {
   }
 
   private prepareforSearch(data): Athlete[] {
-    console.log(data);
     const query = this.queryParams$.value.search;
     const by = this.queryParams$.value.cursor;
     return data.filter(record => String(record[by]).toLowerCase().includes(query));

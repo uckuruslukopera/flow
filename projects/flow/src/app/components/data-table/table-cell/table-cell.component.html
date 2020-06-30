@@ -1,0 +1,23 @@
+<!-- <span *ngIf="!editMode">{{getValue(record, column.propertyName)}}</span> -->
+<ng-container *ngIf="!editMode">
+    <ng-container [ngSwitch]="column.type">
+        <i *ngSwitchCase="2" class="material-icons content">{{getValue(record, column.propertyName)}}</i>
+        <span *ngSwitchCase="3">{{getValue(record, column.propertyName) | date:'longDate'}}</span>
+        <span *ngSwitchCase="4">{{getValue(record, column.propertyName) | date:'medium'}}</span>
+        <span *ngSwitchDefault>{{getValue(record, column.propertyName)}}</span>
+    </ng-container>
+</ng-container>
+
+
+<i *ngIf="!editMode && column.editable" class="material-icons edit" (click)="prepareForEdit($event)">edit</i>
+<ng-container *ngIf="editMode">
+    <ng-container [ngSwitch]="column.type">
+        <input *ngSwitchCase="2" autofocus type="number" [(ngModel)]="newCellValue">
+        <input *ngSwitchCase="3" autofocus type="date" [(ngModel)]="newCellValue">
+        <input *ngSwitchCase="4" autofocus type="datetime-local" [(ngModel)]="newCellValue">
+        <input *ngSwitchDefault autofocus type="text" [(ngModel)]="newCellValue">
+    </ng-container>
+</ng-container>
+
+
+<i *ngIf="editMode" class="material-icons save" (click)="prepareForSave($event)">check</i>

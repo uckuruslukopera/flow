@@ -1,4 +1,36 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { BehaviorSubject } from 'rxjs';
+
+export enum Type {
+  Custom = 6,
+  Date = 5,
+  DateTime = 4,
+  Currency = 3,
+  Icon = 2,
+  Number = 1,
+  String = 0
+}
+
+export interface Column {
+  displayName: string;
+  propertyName: string;
+  sort: boolean;
+  type: Type;
+  editable: boolean;
+}
+
+export interface DataTableSettings {
+  columns: Array<Column>;
+  data: Array<any>;
+  searchField: string;
+  searchPlaceholder: string;
+  pageSizes: Array<{ displayName: string, value: number }>;
+  currentPageSize: number;
+  totalPages: number;
+  currentPage: number;
+  enableSearch: boolean;
+  currentSort: Array<{ propertyName: string; isAscending: boolean }>;
+}
 
 @Component({
   selector: "app-data-table",
@@ -7,38 +39,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class DataTableComponent implements OnInit {
 
-  @Input() settings: {
-    columns: Array<{
-      displayName: string;
-      propertyName: string;
-      sort: boolean;
-    }>,
-    data: Array<any>,
-    searchField: string,
-    searchPlaceholder: string,
-    pageSizes: Array<{ displayName: string, value: number }>,
-    currentPageSize: number,
-    totalPages: number,
-    currentPage: number,
-    enableSearch: boolean,
-    currentSort: Array<{ propertyName: string; isAscending: boolean }>
-  } = {
-      columns: [],
-      data: [],
-      searchField: "",
-      searchPlaceholder: "Search",
-      pageSizes: [{ displayName: "5", value: 5 },
-      { displayName: "10", value: 10 },
-      { displayName: "25", value: 25 },
-      { displayName: "50", value: 50 },
-      { displayName: "100", value: 100 }
-      ],
-      currentPageSize: 25,
-      totalPages: 0,
-      currentPage: 0,
-      enableSearch: true,
-      currentSort: []
-    };
+  @Input() settings: DataTableSettings = {
+    columns: [],
+    data: [],
+    searchField: "",
+    searchPlaceholder: "Search",
+    pageSizes: [{ displayName: "5", value: 5 },
+    { displayName: "10", value: 10 },
+    { displayName: "25", value: 25 },
+    { displayName: "50", value: 50 },
+    { displayName: "100", value: 100 }
+    ],
+    currentPageSize: 25,
+    totalPages: 0,
+    currentPage: 0,
+    enableSearch: true,
+    currentSort: []
+  };
 
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() changePageSize: EventEmitter<number> = new EventEmitter();
@@ -46,18 +63,12 @@ export class DataTableComponent implements OnInit {
   @Output() changeSort: EventEmitter<{ propertyName: string; isAscending: boolean }> = new EventEmitter();
   @Output() saveRecord: EventEmitter<any> = new EventEmitter();
 
-  cellBeingEdited = { index: 0, column: "" };
-  newCellValue = "";
-
   constructor() { }
 
   ngOnInit(): void {
 
   }
 
-  getValue(obj, propertyName): any {
-    return obj[propertyName];
-  }
 
   isSortField(propertyName): boolean {
     return this.settings.currentSort.some(s => s.propertyName === propertyName);
@@ -89,16 +100,7 @@ export class DataTableComponent implements OnInit {
     this.changeSort.emit(e);
   }
 
-  switchToEdit(index, column) {
-    this.cellBeingEdited = { index: index, column: column };
-    this.newCellValue = this.getValue(this.settings.data[index], column);
-
-  }
-
-  saveCell() {
-    const record = this.settings.data[this.cellBeingEdited.index];
-    record[this.cellBeingEdited.column] = this.newCellValue;
-    this.cellBeingEdited = { index: -1, column: "" };
+  saveCell(record: any) {
     this.saveRecord.emit(record);
   }
 }

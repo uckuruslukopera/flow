@@ -9,25 +9,17 @@
                 </app-sort-title>
                 <span *ngIf="!column.sort">{{column.displayName | uppercase}}</span>
             </div>
-            <div *ngFor="let record of settings?.data; let i=index" class="data-table__content-column--cell">
-                <span
-                    *ngIf="i !== cellBeingEdited.index || column.propertyName !== cellBeingEdited.column">{{getValue(record, column.propertyName)}}</span>
-                <i *ngIf="i !== cellBeingEdited.index || column.propertyName !== cellBeingEdited.column"
-                    class="material-icons data-table__content-column--cell-icon--edit"
-                    (click)="switchToEdit(i, column.propertyName)">edit</i>
-                <input autofocus *ngIf="i === cellBeingEdited.index && column.propertyName === cellBeingEdited.column"
-                    type="text" [(ngModel)]="newCellValue">
-                <i *ngIf="i === cellBeingEdited.index && column.propertyName === cellBeingEdited.column"
-                    class="material-icons data-table__content-column--cell-icon--save"
-                    (click)="saveCell(i, column.propertyName)">check</i>
-            </div>
+            <app-table-cell *ngFor="let record of settings?.data; let i=index" class="data-table__content-column--cell"
+                [record]="record" [column]="column" (editFinished)="saveCell($event)">
+            </app-table-cell>
         </div>
     </div>
-    <div class="data-table__footer">
+    <div class=" data-table__footer">
 
         <app-pagination [totalPages]="settings?.totalPages" [currentPage]="settings?.currentPage"
             (pageChanged)="setPage($event)" [pageSizes]="settings?.pageSizes"
-            [currentPageSize]="settings?.currentPageSize" (pageSizeChanged)="setPageSize($event)"></app-pagination>
+            [currentPageSize]="settings?.currentPageSize" (pageSizeChanged)="setPageSize($event)">
+        </app-pagination>
 
     </div>
 </div>
